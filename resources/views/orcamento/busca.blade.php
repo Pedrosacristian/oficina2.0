@@ -5,7 +5,15 @@
             <form action='/orcamento/busca' method="get">
                 @csrf
                 <input type='text' id='search' name='search' class='form-control'> 
-                <button type='submit'>Buscar</button>
+                <button type='submit'>Buscar Por ID ou cliente</button>
+            </form>
+        </div>
+
+        <div id="search-container" class="col-md-12">
+            <form action='/orcamento/busca' method="get">
+                @csrf
+                <input type='text' id='search' name='searchv' class='form-control'> 
+                <button type='submit'>Buscar por vendedor</button>
             </form>
         </div>
 
@@ -13,14 +21,8 @@
             <form action='/orcamento/busca' method="get">
                 @csrf
                 <input type='datetime-local' id='searchDate' name='searchDate' class='form-control'> 
-            </form>
-        </div>
-
-        <div id="search-container" class="col-md-12">
-            <form action='/orcamento/busca' method="get">
-                @csrf
                 <input type='datetime-local' id='searchDate2' name='searchDate2' class='form-control'> 
-                <button type='submit'>Filtrar</button>
+                <button type='submit'>Filtrar por datas:</button>
             </form>
         </div>
 
@@ -61,3 +63,4 @@
         <footer>
         <p> Oficina 2.0 &copy; 2022</p>
       </footer>     
+ 

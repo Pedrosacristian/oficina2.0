@@ -10,22 +10,26 @@ class idController extends Controller
 {
     public function index(Request $request)
     {
-        
+        $date1 = ($request -> searchDate);           
+        $date2 = ($request -> searchDate2);   
         $orcamentos = Orcamento::WHERE('id' , $request->search)
-                                ->orWHERE('client' , 'LIKE', "%{$request->search}%")
+                                        ->orWHERE('client' , 'LIKE', "%{$request->search}%")
+                                        ->orderby('time', 'desc')
+                                        ->get();
+               if ($request->searchv) {              
+        $orcamentos = Orcamento::WHERE('vendedor' , 'LIKE', "%{$request->searchv}%")
                                 ->orderby('time', 'desc')
                                 ->get();
-       
-
-        return view('orcamento.busca', compact('orcamentos'));
+               }
+               if ($request->searchDate) {
+                $orcamentos = Orcamento::WhereBetween('time', [$date1, $date2])->get();
+            }
+               return view('orcamento.busca', compact('orcamentos'));
     }
 
     public function search(Request $request)
     {
-        
         $orcamentos = Orcamento::WhereBetween('time', [$request->searchDate, $request->searchDate2])->get();
-       
-
         return view('orcamento.busca', compact('orcamentos'));
     }
     
@@ -53,7 +57,7 @@ class idController extends Controller
         
         Orcamento::findOrFail($id)->delete();
 
-        return redirect('/orcamento/busca') ->with('msg', 'Orçamento excluído com sucesso!');
+        return redirect('/orcamento/busca')->with('msg', 'Orçamento excluído com sucesso!');
     }
 
     public function edit($id) {
@@ -62,6 +66,12 @@ class idController extends Controller
         return view('orcamento.edit', ['orcamento' => $orcamento]);
     }
     
+    public function update(Request $request) {
+
+        Orcamento::findOrFail($request->id)->update($request->all());
+
+        return redirect('/orcamento/busca')->with('msg', 'Orcamento editado com sucesso!');
+    }
 }
 
 

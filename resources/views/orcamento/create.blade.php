@@ -22,10 +22,9 @@
             <label for='title'>Data e hora:</label>
             <input type='datetime-local' class='form-control' id='time' name='time' >
         </div>
-        <input type='submit' class='btn btm primary' value='Criar orçamento'>
+        <input type='submit' class='btn btm primary' value='Cadastrar Orçamento'>
     </form>
 </div>
-
 <footer>
         <p> Oficina 2.0 &copy; 2022</p>
       </footer>     
